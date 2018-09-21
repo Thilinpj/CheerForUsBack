@@ -23,3 +23,5 @@ Route::post('articleStore','Articles@articleStore');
      return response()->json($data);
  });
 
+
+ 
