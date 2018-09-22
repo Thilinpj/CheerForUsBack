@@ -11,7 +11,7 @@ class Articles extends Controller
 
         $article=new adminArticles();
         $article->caption = $request->caption;
-        $article->img = $request->img;
+        $article->img = $request->Input('img');
         $article->description = $request->description;
         $article->save();
         $articles=adminArticles::all();
