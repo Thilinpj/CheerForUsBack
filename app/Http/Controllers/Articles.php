@@ -32,4 +32,10 @@ class Articles extends Controller
        $response =array('response'=>'Article deleted!','success'=>true);
        return $response;
     }
+
+    public function getArticle($id){
+$articleToDelete = adminArticles::where('id',$id)->get();
+return response()->json($articleToDelete);
+
+    }
 }
