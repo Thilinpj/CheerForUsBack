@@ -26,4 +26,10 @@ class Articles extends Controller
 //        ]);
 //
     }
+    public function articleDelete($id){
+        
+        adminArticles::where('id',$id)->delete();
+       $response =array('response'=>'Article deleted!','success'=>true);
+       return $response;
+    }
 }

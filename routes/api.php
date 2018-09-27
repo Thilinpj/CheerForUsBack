@@ -23,5 +23,7 @@ Route::post('articleStore','Articles@articleStore');
      return response()->json($data);
  });
 
+ Route::get('deleteArticles/{id}', 'Articles@articleDelete');
+
 
  
