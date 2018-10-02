@@ -17,14 +17,11 @@ class Articles extends Controller
         $articles=adminArticles::all();
 
         //$response = array('response'=>'Article added successfully!','success'=>true);
-      
-        return response()->json($articles) ;
-
-        //        $this->validate($request,[
-//            'caption'=>'required',
-//            'description'=>'required',
-//        ]);
-//
+//            $this->validate($request,[
+//    'caption'=>'required',
+//   'description'=>'required',
+//     ]);
+    return response()->json($articles) ;
     }
     public function articleDelete($id){
         
@@ -34,8 +31,8 @@ class Articles extends Controller
     }
 
     public function getArticle($id){
-$articleToDelete = adminArticles::where('id',$id)->get();
-return response()->json($articleToDelete);
+$select = adminArticles::where('id',$id)->get();
+return response()->json($select);
 
     }
 }
