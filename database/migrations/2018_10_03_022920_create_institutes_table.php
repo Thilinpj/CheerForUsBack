@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSignUpsTable extends Migration
+class CreateInstitutesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,25 @@ class CreateSignUpsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sign_ups', function (Blueprint $table) {
+        Schema::create('institutes', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
             $table->string('name');
             $table->string('email');
+            $table->string('address_line1');
+            $table->string('address_line2');
+            $table->string('city');
+            $table->string('province');
+            $table->string('country');
+            $table->string('postal_code');
             $table->string('password');
             $table->string('confirm_password');
-            $table->string('userType')->default('customer');
+            $table->string('userType')->default('institute');
             $table->timestamps();
             $table->foreign('user_id')
             ->references('id')->on('users')
             ->onDelete('cascade');
         $table->primary('user_id');
        
-            
-            
         });
     }
 
@@ -38,6 +42,6 @@ class CreateSignUpsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sign_ups');
+        Schema::dropIfExists('institutes');
     }
 }
