@@ -10,6 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 class SignUp extends Model
 {
     protected $fillable = [
-        'name', 'email','password','confirm_password'
+        'user_id','name', 'email','password','confirm_password'
     ];
 }

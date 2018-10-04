@@ -38,57 +38,89 @@ class UserControl extends Controller
        ];
 
    public function customerSignUp(Request $request){
-$request->validate($this->customerValidate);
-    $detail=new SignUp();
-    $detail->name = $request->name;
-    $detail->email = $request->email;
-    $detail->password = bcrypt($request->password);
-    $detail->confirm_password = bcrypt($request->confirm_password);
-    $detail->save();
-    $details=SignUp::all();
-    return response()->json($details) ;
-   }
-   public function adminSignUp(Request $request){
+
     $request->validate($this->customerValidate);
+       $user=new User([
+           'name' => $request->name,
+           'email' => $request->email,
+           'user_type'=>"customer",
+           'password' => bcrypt($request->password),
+           //'confirm_password' => bcrypt($request->confirm_password)
+       ]);
+       $user->save();
+
+    $customer=new SignUp([
+        'user_id'=>$user->id,
+        'name' => $request->name,
+       'email' => $request->email,
+      'password' => bcrypt($request->password),
+      'confirm_password' => bcrypt($request->confirm_password)
+    ]);
+     $customer->save();
+     $customers=SignUp::all();
+    return response()->json($user) ;
+   }
 
 
-    $common=new User();
-    $common->name = $request->name;
-    $common->email = $request->email;
-    //$common->userType=$request='admin';
-    $common->password = bcrypt($request->password);
-    $common->save();  
-    $commons=User::all();
-    return response()->json($commons) ;
+   public function adminSignUp(Request $request){
 
-        $detail=new Admin();
-        $detail->name = $request->name;
-        $detail->email = $request->email;
-        $detail->password = bcrypt($request->password);
-        $detail->confirm_password = bcrypt($request->confirm_password);
-        $detail->save();
-        $details=Admin::all();
-        return response()->json($details) ;
+    $request->validate($this->adminValidate);
+    $user=new User([
+        'name' => $request->name,
+       'email' => $request->email,
+       'user_type'=>"admin",
+       'password' => bcrypt($request->password),
+        //'confirm_password' => bcrypt($request->confirm_password)
+    ]);
+
+       $user->save();
+       $users=User::all();
+
+
+        $admin=new Admin([
+            'user_id'=>$user->id,
+            'name' => $request->name,
+            'email' => $user->email,
+            'password' => bcrypt($request->password),
+            'confirm_password' => bcrypt($request->confirm_password)
+        ]);
+
+        $admin->save();
+        $admins=Admin::all();
+        return response()->json($admins) ;
 
 
 
        }
     public function instituteSignUp(Request $request){
         $request->validate($this->instituteValidate);
-        $detail=new Institute();
-        $detail->name = $request->name;
-        $detail->email = $request->email;
-        $detail->address_line1= $request->address_line1;
-        $detail->address_line2= $request->address_line2;
-        $detail->city= $request->city;
-        $detail->province= $request->province;
-        $detail->country = $request->country;
-        $detail->postal_code = $request->postal_code;
-        $detail->password = bcrypt($request->password);
-        $detail->confirm_password = bcrypt($request->confirm_password);
-        $detail->save();
-        $details=Institute::all();
-        return response()->json($details) ;
+
+        $user=new User([
+            'name' => $request->name,
+            'email' => $request->email,
+            'user_type'=>"institute",
+            'password' => bcrypt($request->password),
+            //'confirm_password' => bcrypt($request->confirm_password)
+        ]);
+        $user->save();
+
+        $institute=new Institute([
+            'user_id'=>$user->id,
+           'name' => $request->name,
+           'email' => $request->email,
+            'address_line1'=> $request->address_line1,
+            'address_line2'=> $request->address_line2,
+            'city'=> $request->city,
+            'province'=> $request->province,
+           'country' => $request->country,
+          'postal_code' => $request->postal_code,
+          'password' => bcrypt($request->password),
+            'confirm_password' => bcrypt($request->confirm_password),
+        ]);
+       
+        $institute->save();
+        $institutes=Institute::all();
+        return response()->json($institute) ;
     }
 
 }

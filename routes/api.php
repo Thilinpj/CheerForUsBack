@@ -26,6 +26,6 @@ Route::post('articleStore','Articles@articleStore');
  Route::get('deleteArticles/{id}', 'Articles@articleDelete');
 Route::get('articleDetails/{id}','Articles@getArticle');
 
- Route::post('signup','UserControl@customerSignUp');
+ Route::post('customer','UserControl@customerSignUp');
  Route::post('admin','UserControl@adminSignUp');
  Route::post('institute','UserControl@instituteSignUp');
