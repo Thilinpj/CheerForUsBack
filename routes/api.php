@@ -29,3 +29,4 @@ Route::get('articleDetails/{id}','Articles@getArticle');
  Route::post('customer','UserControl@customerSignUp');
  Route::post('admin','UserControl@adminSignUp');
  Route::post('institute','UserControl@instituteSignUp');
+Route::post('login','UserControl@login');

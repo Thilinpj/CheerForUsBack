@@ -6,11 +6,14 @@ use App\Admin;
 use App\Institute;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth; 
+use Validator;
 
 class UserControl extends Controller
 
 
 {
+    public $successStatus = 200;
     private $customerValidate = [
      'name' =>'required|unique:sign_ups|min:3|max:32',
      'email'=>'required|unique:sign_ups|email',
@@ -123,4 +126,16 @@ class UserControl extends Controller
         return response()->json($institute) ;
     }
 
+
+    public function login(){
+
+        if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){ 
+            $user = Auth::user(); 
+            $success['token'] =  $user->createToken('MyApp')-> accessToken; 
+            return response()->json(['success' => $success], $this-> successStatus); 
+        } 
+        else{ 
+            return response()->json(['error'=>'Unauthorised'], 401); 
+        } 
+    }
 }
