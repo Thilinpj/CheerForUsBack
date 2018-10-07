@@ -138,4 +138,12 @@ class UserControl extends Controller
             return response()->json(['error'=>'Unauthorised'], 401); 
         } 
     }
+
+    public function details($id) 
+    { 
+        $user = Auth::user(); 
+        $user = User::where('id',$id)->get();
+        return response()->json($user);
+       // return response()->json(['success' => $user], $this-> successStatus); 
+    } 
 }
